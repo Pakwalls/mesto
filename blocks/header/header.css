@@ -1,3 +1,8 @@
 .header {
-  
+  padding: 45px 0 0;
+  width: 100%;
+  max-width: calc(100% * (880 / 1280));
+  min-height: 74px;
+  border-bottom: solid 1px;
+  border-color: rgba(84, 84, 84, .7);
 }
