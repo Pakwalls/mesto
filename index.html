@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="root">
+  <div class="page">
+    <header class="header">
+      <a href="#"><img src="./images/header_logo.svg" alt="логотип страницы"></a>
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <div class="profile__card">
+          <img src="./images/avatar.png" alt="аватар карточки пользователя" class="profile__img">
+          <h2 class="profile__title">Жак-Ив Кусто</h2> <!---------------------------------------------------------через after прикрутить кнопку редактора-------------->
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__btn"></button>
+      </section>
+
+      <section class="elements">
+        <ul class="cards">
+          <li class="cards__item">
+            <img src="./images/dagestan.jpg" alt="фотография дагестан" class="cards__img">
+            <div class="cards__nameplate">
+              <h2 class="cards__title">Дагестан</h2>
+              <div class="cards__feedback"></div>
+            </div>  
+          </li>
+        </ul>
+        <ul class="cards">
+          <li class="cards__item">
+            <img src="./images/peterburg.jpg" alt="фотография санкт-петербург" class="cards__img">
+            <div class="cards__nameplate">
+              <h2 class="cards__title">Санкт-Петербург</h2>
+              <div class="cards__feedback"></div>
+            </div>  
+          </li>
+        </ul>
+        <ul class="cards">
+          <li class="cards__item">
+            <img src="./images/moscow.jpg" alt="фотография москва" class="cards__img">
+            <div class="cards__nameplate">
+              <h2 class="cards__title">Москва</h2>
+              <div class="cards__feedback"></div>
+            </div>  
+          </li>
+        </ul>
+        <ul class="cards">
+          <li class="cards__item">
+            <img src="./images/tokyo.jpg" alt="фотография токио" class="cards__img">
+            <div class="cards__nameplate">
+              <h2 class="cards__title">Токио</h2>
+              <div class="cards__feedback"></div>
+            </div>  
+          </li>
+        </ul>
+        <ul class="cards">
+          <li class="cards__item">
+            <img src="./images/united_arab_emirates.jpg" alt="фотография оаэ" class="cards__img">
+            <div class="cards__nameplate">
+              <h2 class="cards__title">ОАЭ</h2>
+              <div class="cards__feedback"></div>
+            </div>  
+          </li>
+        </ul>
+        <ul class="cards">
+          <li class="cards__item">
+            <img src="./images/washington.jpg" alt="фотография вашингтон" class="cards__img">
+            <div class="cards__nameplate">
+              <h2 class="cards__title">вашингтон</h2>
+              <div class="cards__feedback"></div>
+            </div>  
+          </li>
+        </ul>
+      </section>
+
+      <section class="popup">
+        <div class="popup__container">
+          <h2 class="popup__title"></h2>
+          <input type="text" class="popup__name">
+          <input type="text" class="popup__job">
+          <input type="button" value="Сохранить">
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <h2 class="footer__copyright">&copy; 2022 Mesto Russia</h2>
+    </footer>
+  </div>
+
+  <script src="./pages/index.js"></script>
+</body>
+</html>
