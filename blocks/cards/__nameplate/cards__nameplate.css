@@ -1,0 +1,5 @@
+.cards__nameplate {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}

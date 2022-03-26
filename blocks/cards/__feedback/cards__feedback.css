@@ -1,0 +1,10 @@
+.cards__feedback {
+  margin: 25px 20px 31px;
+  background-image: url(../../../images/feedback_disabled.svg);
+  min-width: 19px;
+  min-height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.cards__feedback_status_active {
+  margin: 0 20px 0 0;
+  background-image: url(../../../images/.cards__feedback_status_active.svg);
+  min-width: 19px;
+  min-height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+}
