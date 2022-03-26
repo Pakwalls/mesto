@@ -1,0 +1,6 @@
+.profile__card {
+  display: grid;
+  align-items: center;
+  grid-template: auto / 120px repeat(auto-fit, minmax(320px, 1fr));
+  column-gap: 30px;
+}
