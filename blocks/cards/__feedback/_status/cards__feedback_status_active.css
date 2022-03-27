@@ -7,4 +7,9 @@
   background-size: contain;
   background-position: center;
   cursor: pointer;
+  transition: opacity .5s ease;
+}
+
+.cards__feedback_status_active {
+  opacity: .5;
 }

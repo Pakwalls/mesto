@@ -4,7 +4,7 @@
   background-image: url(../../../images/add_button.svg);
   background-repeat: no-repeat;
   cursor: pointer;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0);
   border: none;
   justify-self: end;
 }
