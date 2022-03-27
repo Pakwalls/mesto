@@ -2,3 +2,9 @@
   width: 100%;
   max-width: calc(100% * (880 / 1280));
 }
+
+@media screen and (max-width: 710px) {
+  .content {
+    max-width: calc(100% * (282 / 320));
+  }
+}

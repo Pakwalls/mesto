@@ -5,3 +5,10 @@
   grid-template-columns: repeat(auto-fit, minmax(344px, 1fr));
   align-items: center;
 }
+
+@media screen and (max-width: 550px) {
+  .profile {
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    padding: 42px 0 0;
+  }
+}

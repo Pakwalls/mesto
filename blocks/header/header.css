@@ -6,3 +6,17 @@
   border-bottom: solid 1px;
   border-color: rgba(84, 84, 84, .7);
 }
+
+@media screen and (max-width: 710px) {
+  .header {
+    max-width: calc(100% * (282 / 320));
+    padding: 28px 0 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    max-width: 100%;
+    padding: 28px 0 0;
+  }
+}
