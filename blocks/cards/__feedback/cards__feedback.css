@@ -7,4 +7,9 @@
   background-size: contain;
   background-position: center;
   cursor: pointer;
+  transition: opacity .5s ease;
+}
+
+.cards__feedback:hover {
+  opacity: .5;
 }

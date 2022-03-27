@@ -1,0 +1,14 @@
+.popup__name {
+  margin: 54px 0 0;
+}
+
+.popup__name:focus {
+  content: "";
+  outline: none;
+}
+
+@media screen and (max-width: 560px) {
+  .popup__name {
+    margin: 75px 0 0;
+  }
+}
