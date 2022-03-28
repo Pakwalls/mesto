@@ -5,11 +5,14 @@ let editProfile = profileCard.querySelector(`.profile__edit-btn`);
 let popupWindow = document.querySelector(`.popup`);
 let closePopup = popupWindow.querySelector(`.popup__closer`);
 
+let nameInProfile = profileCard.querySelector(`.profile__title`)
+let jobInProfile = profileCard.querySelector(`.profile__subtitle`)
+
 function togglePopup() {
   
-  popupWindow.classList.toggle(`popup_opened`)
-  nameInput.value = "";
-  jobInput.value = "";
+  popupWindow.classList.toggle(`popup_opened`);
+  nameInput.value = nameInProfile.textContent;
+  jobInput.value = jobInProfile.textContent;
 }
 editProfile.addEventListener('click', togglePopup);
 closePopup.addEventListener('click', togglePopup);
@@ -28,6 +31,7 @@ popupWindow.addEventListener('click', closeClickOverlay)
 
 let cards = document.querySelector(`.cards`);
 let addPictureButton = profileCard.querySelector(`.profile__add-btn`);
+
 
 function addNewPicture() {
 
@@ -48,9 +52,6 @@ let formElement = document.querySelector(`.popup__form`);
 let nameInput = formElement.querySelector(`.popup__name`);
 let jobInput = formElement.querySelector(`.popup__job`);
 
-let nameInProfile = profileCard.querySelector(`.profile__title`)
-let jobInProfile = profileCard.querySelector(`.profile__subtitle`)
-
 nameInput.value = nameInProfile.textContent;
 jobInput.value = jobInProfile.textContent;
 
@@ -60,20 +61,9 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     nameInProfile.textContent = nameInput.value;
     jobInProfile.textContent = jobInput.value;
+
   }
 
   togglePopup();
 }
-
 formElement.addEventListener('submit', formSubmitHandler);
-
-
-
-/*let cardsFeedback = cards.querySelectorAll(`.cards__feedback`);
-console.log(cardsFeedback);
-function toggleFeedback() {
-  
-  cardsFeedback.classList.toggle(`cards__feedback_status_active`);
-
-}
-cardsFeedback.addEventListener('click', toggleFeedback);*/
