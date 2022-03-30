@@ -21,8 +21,10 @@
         <div class="profile__card">
           <img src="./images/avatar.png" alt="аватар карточки пользователя" class="profile__img">
           <div class="profile__description">
-            <button type="button" class="profile__edit-btn hover-animated"></button>
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <div class="profile__title-box">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-btn hover-animated"></button>
+            </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </div>
@@ -87,8 +89,8 @@
         <button type="button" class="popup__closer hover-animated"></button>
         <form class="popup__form">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" class="popup__name styled-item" placeholder="имя">
-          <input type="text" class="popup__job styled-item" placeholder="подпись">
+          <input type="text" class="popup__name styled-item" name="name" placeholder="имя" required>
+          <input type="text" class="popup__job styled-item" name="job" placeholder="подпись" required>
           <button type="submit" class="popup__button">Сохранить</button>      
         </form>  
       </div>
