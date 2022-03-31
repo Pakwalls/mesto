@@ -22,12 +22,14 @@
 @import url(../blocks/elements/elements.css);
 
 @import url(../blocks/cards/cards.css);
-@import url(../blocks/cards/__title/cards__title.css);
-@import url(../blocks/cards/__nameplate/cards__nameplate.css);
 @import url(../blocks/cards/__item/cards__item.css);
-@import url(../blocks/cards/__img/cards__img.css);
-@import url(../blocks/cards/__feedback/cards__feedback.css);
-@import url(../blocks/cards/__feedback/_active/cards__feedback_active.css);
+
+@import url(../blocks/article/article.css);
+@import url(../blocks/article/__img/article__img.css);
+@import url(../blocks/article/__nameplate/article__nameplate.css);
+@import url(../blocks/article/__title/article__title.css);
+@import url(../blocks/article/__feedback/article__feedback.css);
+@import url(../blocks/article/__feedback/_active/article__feedback_active.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

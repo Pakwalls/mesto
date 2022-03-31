@@ -1,4 +1,4 @@
-.cards__feedback {
+.article__feedback {
   margin: 0 20px 0 0;
   min-width: 22px;
   height: 19px;
@@ -12,6 +12,6 @@
   transition: opacity .5s ease;
 }
 
-.cards__feedback:hover {
+.article__feedback:hover {
   opacity: .5;
 }
