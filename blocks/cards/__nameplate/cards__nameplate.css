@@ -4,5 +4,5 @@
   align-items: center;
   background-color: #fff;
   box-sizing: border-box;
-  padding: 24px 0 25px;
+  min-height: 79px;
 }
