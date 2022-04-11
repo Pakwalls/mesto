@@ -33,54 +33,7 @@
 
       <section class="elements">
         <ul class="cards">
-          <li class="cards__item article">
-            <img src="./images/karachaevsk.jpg" alt="фотография карачаевск" class="article__img">
-            <div class="article__nameplate">
-              <h2 class="article__title">Карачаевск</h2>
-              <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
-            </div>
-            <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>
-          </li>
-          <li class="cards__item article">
-            <img src="./images/elbrus.jpg" alt="фотография эльбрус" class="article__img">
-            <div class="article__nameplate">
-              <h2 class="article__title">Гора Эльбрус</h2>
-              <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
-            </div>
-            <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>
-          </li>
-          <li class="cards__item article">
-            <img src="./images/dombay.jpg" alt="фотография домбай" class="article__img">
-            <div class="article__nameplate">
-              <h2 class="article__title">Домбай</h2>
-              <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
-            </div>
-            <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>
-          </li>
-          <li class="cards__item article">
-            <img src="./images/elbrus.jpg" alt="фотография эльбрус" class="article__img">
-            <div class="article__nameplate">
-              <h2 class="article__title">Гора Эльбрус</h2>
-              <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
-            </div>
-            <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>  
-          </li>
-          <li class="cards__item article">
-            <img src="./images/dombay.jpg" alt="фотография домбай" class="cards__img">
-            <div class="article__nameplate">
-              <h2 class="article__title">Домбай</h2>
-              <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
-            </div>
-            <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>  
-          </li>
-          <li class="cards__item article">
-            <img src="./images/karachaevsk.jpg" alt="фотография карачаево-черкесск" class="article__img">
-            <div class="article__nameplate">
-              <h2 class="article__title">Карачаево-Черкесск</h2>
-              <button type="button" aria-label="like-button" class="article__feedback"></button>
-            </div>
-            <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>  
-          </li>
+
         </ul>
       </section>
 
@@ -90,16 +43,41 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <template class="template">
+      <li class="cards__item article">
+        <img src="#" alt="#" class="article__img">
+        <div class="article__nameplate">
+          <h2 class="article__title"></h2>
+          <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
+        </div>
+        <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>
+      </li>
+    </template>
+
+    <div class="popup popup_type_edit-form">
       <div class="popup__container">
         <button type="button" aria-label="close-popup" class="popup__closer hover-animated"></button>
         <form name="popup__form" class="popup__form" method="get">
           <h2 class="popup__title">Редактировать профиль</h2>
           <fieldset class="popup__data">
-            <input type="text" class="popup__input" id="name-field" name="name" placeholder="имя" required>
-            <input type="text" class="popup__input" id="job-field" name="job" placeholder="подпись" required>
+            <input type="text" class="popup__input" id="name-field" name="name" placeholder="Имя" required>
+            <input type="text" class="popup__input" id="job-field" name="job" placeholder="Подпись" required>
           </fieldset>
           <button type="submit" class="popup__button">Сохранить</button>      
+        </form>  
+      </div>
+    </div>
+
+    <div class="popup popup_type_add-form">
+      <div class="popup__container">
+        <button type="button" aria-label="close-popup" class="popup__closer hover-animated"></button>
+        <form name="popup__form" class="popup__form" method="get">
+          <h2 class="popup__title">Новое место</h2>
+          <fieldset class="popup__data">
+            <input type="text" class="popup__input" id="place-name" name="place-name" placeholder="Название" required>
+            <input type="text" class="popup__input" id="place-link" name="place-link" placeholder="Ссылка на картинку" required>
+          </fieldset>
+          <button type="submit" class="popup__button">Создать</button>      
         </form>  
       </div>
     </div>
