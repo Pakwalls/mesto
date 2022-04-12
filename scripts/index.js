@@ -40,7 +40,7 @@ const jobInProfile = profileCard.querySelector(`.profile__subtitle`)
 const list = document.querySelector(`.cards`)
 const listElementTemplate = document.querySelector(`.template`);
 
-function build() {
+function renderCards() {
   const cardsList = initialCards.map(getElement);
   list.append(...cardsList);
 }
@@ -68,9 +68,11 @@ function getElement(item) {
   return cardClone;
 }
 
+
+
 formAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  let newCard = {
+  const newCard = {
     name: placeInput.value,
     link: placeLinkInput.value,
   };
@@ -85,9 +87,8 @@ function openEditWindow() {
   nameInput.value = nameInProfile.textContent;
   jobInput.value = jobInProfile.textContent;
 
-  openPopupWinow(popupEditWindow);
+  openPopupWindow(popupEditWindow);
 }
-
 function makeSubmitHandler (evt) {
   evt.preventDefault();
   nameInProfile.textContent = nameInput.value;
@@ -117,7 +118,7 @@ function handleClosePopup(evt) {
 
 formEdit.addEventListener('submit', makeSubmitHandler);
 
-profileEditBtn.addEventListener('click', () => openPopupWindow(popupEditWindow));
+profileEditBtn.addEventListener('click', openEditWindow);
 editFormClosebtn.addEventListener('click', handleClosePopup);
 
 profileAddbtn.addEventListener('click', () => openPopupWindow(popupAddWindow));
@@ -125,4 +126,4 @@ addFormCloseBtn.addEventListener('click', handleClosePopup);
 
 popupZoomCloseBtn.addEventListener('click', handleClosePopup);
 
-build();
+renderCards();
