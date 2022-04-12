@@ -51,19 +51,14 @@ function getElement(item) {
   const image = cardClone.querySelector(`.article__img`);
   const delButton = cardClone.querySelector(`.article__del-btn`);
   const likeButton = cardClone.querySelector(`.article__feedback`);
-  
-  //console.log(likeButton);
-  //console.log(delButton);
 
   likeButton.addEventListener('click', () => { likeButton.classList.toggle(`article__feedback_active`); })
   delButton.addEventListener('click', (evt) => evt.target.closest(`.article`).remove());
   image.addEventListener('click', function() { 
-    popupZoom.classList.add(`popup_opened`);
+    openPopupWinow(popupZoom);
     zoomImage.src = image.src;
     zoomCaption.textContent = item.name;
     zoomImage.alt = image.alt;
-    console.log(zoomImage);
-    console.log(zoomCaption.textContent);
   });
   
   name.textContent = item.name;
@@ -82,34 +77,15 @@ addFormElement.addEventListener('submit', (evt) => {
   card = getElement(newCard);
   list.prepend(card);
   
-
-  closeAddWindow();
+  closePopupWindow(popupAddWindow);
   addFormElement.reset();
 });
 
-
-// открытия и закрытия ниже
-
 function openEditWindow() {
-  popupEditWindow.classList.add(`popup_opened`);
   nameInput.value = nameInProfile.textContent;
   jobInput.value = jobInProfile.textContent;
-}
 
-function closeEditWindow() {
-  popupEditWindow.classList.remove(`popup_opened`);
-}
-
-function openAddWindow() {
-  popupAddWindow.classList.add(`popup_opened`);
-}
-
-function closeAddWindow() {
-  popupAddWindow.classList.remove(`popup_opened`);
-}
-
-function closeZoomWindow() {
-  popupZoom.classList.remove(`popup_opened`);
+  openPopupWinow(popupEditWindow);
 }
 
 function makeSubmitHandler (evt) {
@@ -117,17 +93,34 @@ function makeSubmitHandler (evt) {
   nameInProfile.textContent = nameInput.value;
   jobInProfile.textContent = jobInput.value;
   
-  closeEditWindow();
+  closePopupWindow(popupEditWindow);
 }
 
+// открыватель
+
+function openPopupWindow(popupWindow) {
+  popupWindow.classList.add(`popup_opened`);
+}
+
+// закрыватель
+
+function closePopupWindow(popupWindow) {
+  popupWindow.classList.remove(`popup_opened`);
+}
+
+function handleClosePopup(evt) {
+  const popupWindow = evt.target.closest(`.popup`);
+  closePopupWindow(popupWindow);
+}
 
 editFormElement.addEventListener('submit', makeSubmitHandler);
 
-editProfile.addEventListener('click', openEditWindow);
-closeEditPopupButton.addEventListener('click', closeEditWindow);
+editProfile.addEventListener('click', () => openPopupWindow(popupEditWindow));
+closeEditPopupButton.addEventListener('click', handleClosePopup);
 
-addCard.addEventListener('click', openAddWindow);
-closeAddPopupButton.addEventListener('click', closeAddWindow);
+addCard.addEventListener('click', () => openPopupWindow(popupAddWindow));
+closeAddPopupButton.addEventListener('click', handleClosePopup);
 
-closeZoomPopup.addEventListener('click', closeZoomWindow);
+closeZoomPopup.addEventListener('click', handleClosePopup);
+
 build();
