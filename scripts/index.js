@@ -113,6 +113,8 @@ function handleClosePopup(evt) {
   closePopupWindow(popupWindow);
 }
 
+// слушатели
+
 formEdit.addEventListener('submit', makeSubmitHandler);
 
 profileEditBtn.addEventListener('click', () => openPopupWindow(popupEditWindow));
