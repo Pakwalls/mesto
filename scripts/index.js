@@ -14,25 +14,25 @@ const initialCards = [
 ]; 
 
 const profileCard = document.querySelector(`.profile`);
-const editProfile = profileCard.querySelector(`.profile__edit-btn`);
-const addCard = profileCard.querySelector(`.profile__add-btn`);
+const profileEditBtn = profileCard.querySelector(`.profile__edit-btn`);
+const profileAddbtn = profileCard.querySelector(`.profile__add-btn`);
 
 const popupEditWindow = document.querySelector(`.popup_type_edit-form`);
-const editFormElement = popupEditWindow.querySelector(`.popup__form`);
-const closeEditPopupButton = popupEditWindow.querySelector(`.popup__closer`);
-const nameInput = editFormElement.querySelector(`#name-field`);
-const jobInput = editFormElement.querySelector(`#job-field`);
+const formEdit = popupEditWindow.querySelector(`.popup__form`);
+const editFormClosebtn = popupEditWindow.querySelector(`.popup__closer`);
+const nameInput = formEdit.querySelector(`#name-field`);
+const jobInput = formEdit.querySelector(`#job-field`);
 
 const popupAddWindow = document.querySelector(`.popup_type_add-form`);
-const addFormElement = popupAddWindow.querySelector(`.popup__form`);
-const placeInput = addFormElement.querySelector(`#place-name`);
-const placeLinkInput = addFormElement.querySelector(`#place-link`);
-const closeAddPopupButton = popupAddWindow.querySelector(`.popup__closer`);
+const formAdd = popupAddWindow.querySelector(`.popup__form`);
+const addFormCloseBtn = popupAddWindow.querySelector(`.popup__closer`);
+const placeInput = formAdd.querySelector(`#place-name`);
+const placeLinkInput = formAdd.querySelector(`#place-link`);
 
 const popupZoom = document.querySelector(`.popup_type_show`);
-const zoomImage = popupZoom.querySelector(`.popup__img`);
-const zoomCaption = popupZoom.querySelector(`.popup__figcaption`);
-const closeZoomPopup = popupZoom.querySelector(`.popup__closer`);
+const popupZoomCloseBtn = popupZoom.querySelector(`.popup__closer`);
+const imageZoom = popupZoom.querySelector(`.popup__img`);
+const captionZoom = popupZoom.querySelector(`.popup__figcaption`);
 
 const nameInProfile = profileCard.querySelector(`.profile__title`)
 const jobInProfile = profileCard.querySelector(`.profile__subtitle`)
@@ -55,10 +55,10 @@ function getElement(item) {
   likeButton.addEventListener('click', () => { likeButton.classList.toggle(`article__feedback_active`); })
   delButton.addEventListener('click', (evt) => evt.target.closest(`.article`).remove());
   image.addEventListener('click', function() { 
-    openPopupWinow(popupZoom);
-    zoomImage.src = image.src;
-    zoomCaption.textContent = item.name;
-    zoomImage.alt = image.alt;
+    openPopupWindow(popupZoom);
+    imageZoom.src = image.src;
+    captionZoom.textContent = item.name;
+    imageZoom.alt = image.alt;
   });
   
   name.textContent = item.name;
@@ -68,7 +68,7 @@ function getElement(item) {
   return cardClone;
 }
 
-addFormElement.addEventListener('submit', (evt) => {
+formAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
   let newCard = {
     name: placeInput.value,
@@ -78,7 +78,7 @@ addFormElement.addEventListener('submit', (evt) => {
   list.prepend(card);
   
   closePopupWindow(popupAddWindow);
-  addFormElement.reset();
+  formAdd.reset();
 });
 
 function openEditWindow() {
@@ -113,14 +113,14 @@ function handleClosePopup(evt) {
   closePopupWindow(popupWindow);
 }
 
-editFormElement.addEventListener('submit', makeSubmitHandler);
+formEdit.addEventListener('submit', makeSubmitHandler);
 
-editProfile.addEventListener('click', () => openPopupWindow(popupEditWindow));
-closeEditPopupButton.addEventListener('click', handleClosePopup);
+profileEditBtn.addEventListener('click', () => openPopupWindow(popupEditWindow));
+editFormClosebtn.addEventListener('click', handleClosePopup);
 
-addCard.addEventListener('click', () => openPopupWindow(popupAddWindow));
-closeAddPopupButton.addEventListener('click', handleClosePopup);
+profileAddbtn.addEventListener('click', () => openPopupWindow(popupAddWindow));
+addFormCloseBtn.addEventListener('click', handleClosePopup);
 
-closeZoomPopup.addEventListener('click', handleClosePopup);
+popupZoomCloseBtn.addEventListener('click', handleClosePopup);
 
 build();
