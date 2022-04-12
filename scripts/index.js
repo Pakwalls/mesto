@@ -29,6 +29,11 @@ const placeInput = addFormElement.querySelector(`#place-name`);
 const placeLinkInput = addFormElement.querySelector(`#place-link`);
 const closeAddPopupButton = popupAddWindow.querySelector(`.popup__closer`);
 
+const popupZoom = document.querySelector(`.popup_type_show`);
+const zoomImage = popupZoom.querySelector(`.popup__img`);
+const zoomCaption = popupZoom.querySelector(`.popup__figcaption`);
+const closeZoomPopup = popupZoom.querySelector(`.popup__closer`);
+
 const nameInProfile = profileCard.querySelector(`.profile__title`)
 const jobInProfile = profileCard.querySelector(`.profile__subtitle`)
 
@@ -46,18 +51,25 @@ function getElement(item) {
   const image = cardClone.querySelector(`.article__img`);
   const delButton = cardClone.querySelector(`.article__del-btn`);
   const likeButton = cardClone.querySelector(`.article__feedback`);
-
+  
   //console.log(likeButton);
   //console.log(delButton);
 
   likeButton.addEventListener('click', () => { likeButton.classList.toggle(`article__feedback_active`); })
   delButton.addEventListener('click', (evt) => evt.target.closest(`.article`).remove());
-  //image.addEventListener('click', )
-
+  image.addEventListener('click', function() { 
+    popupZoom.classList.add(`popup_opened`);
+    zoomImage.src = image.src;
+    zoomCaption.textContent = item.name;
+    zoomImage.alt = image.alt;
+    console.log(zoomImage);
+    console.log(zoomCaption.textContent);
+  });
+  
   name.textContent = item.name;
   image.src = item.link;
   image.alt = `Фотография ${item.name}`;
-    
+  
   return cardClone;
 }
 
@@ -96,6 +108,10 @@ function closeAddWindow() {
   popupAddWindow.classList.remove(`popup_opened`);
 }
 
+function closeZoomWindow() {
+  popupZoom.classList.remove(`popup_opened`);
+}
+
 function makeSubmitHandler (evt) {
   evt.preventDefault();
   nameInProfile.textContent = nameInput.value;
@@ -109,7 +125,9 @@ editFormElement.addEventListener('submit', makeSubmitHandler);
 
 editProfile.addEventListener('click', openEditWindow);
 closeEditPopupButton.addEventListener('click', closeEditWindow);
+
 addCard.addEventListener('click', openAddWindow);
 closeAddPopupButton.addEventListener('click', closeAddWindow);
 
+closeZoomPopup.addEventListener('click', closeZoomWindow);
 build();
