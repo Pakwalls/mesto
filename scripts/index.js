@@ -42,7 +42,7 @@ function getElement(item) {
   likeButton.addEventListener('click', () => { likeButton.classList.toggle(`article__feedback_active`); })
   delButton.addEventListener('click', (evt) => evt.target.closest(`.article`).remove());
   image.addEventListener('click', function() { 
-    openZoomWindow(popupZoom);
+    openPopupWindow(popupZoom);
     imageZoom.src = image.src;
     captionZoom.textContent = item.name;
     imageZoom.alt = image.alt;
@@ -90,29 +90,22 @@ function listenToOpenedModal(e) {
 };
 
 function closeWithEscButton(popupWindow) {
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closePopupWindow(popupWindow);
-    };
-  });
+  document.addEventListener('keydown', (e) => 
+    checkPressedEscape(e, popupWindow)
+  );
 };
+
+function checkPressedEscape(e, popupWindow) {
+  if (e.key === 'Escape') {
+    closePopupWindow(popupWindow);
+  };
+}
 
 //----------------------------------------удалить слушатель ЭСКЕЙПА ----------------------
 
 // открыватель
 
-function openPopupWindow(popupWindow) {
-  const buttonElement = popupWindow.querySelector(`.popup__button`);
-  buttonElement.classList.add(`popup__button_disabled`);
- 
-  popupWindow.classList.add(`popup_opened`);
-  popupWindow.addEventListener('click', listenToOpenedModal);
-  closeWithEscButton(popupWindow);
-};
-
-// открыватель модалок без кнопок
-
-function openZoomWindow(popupWindow) {
+function openPopupWindow(popupWindow) { 
   popupWindow.classList.add(`popup_opened`);
   popupWindow.addEventListener('click', listenToOpenedModal);
   closeWithEscButton(popupWindow);
@@ -121,9 +114,10 @@ function openZoomWindow(popupWindow) {
 // закрыватель
 
 function closePopupWindow(popupWindow) {
+  console.log(111);
   popupWindow.classList.remove(`popup_opened`);
   popupWindow.removeEventListener('click', listenToOpenedModal);
-
+  document.removeEventListener('keydown', this);
 };
 
 function handleClosePopup(evt) {

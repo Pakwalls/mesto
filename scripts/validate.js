@@ -15,7 +15,7 @@ function enableValidation(config) {
 function setEventListeners(form, config) {
   const inputs = Array.from(form.querySelectorAll(config.inputSelector));
   const buttonElement = form.querySelector(config.submitButtonSelector);
-  
+  toggleButton(inputs, buttonElement, config);
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       toggleErrorMessage(form, inputElement, config);
