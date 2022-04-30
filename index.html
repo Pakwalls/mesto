@@ -60,8 +60,10 @@
         <form name="popup__form" class="popup__form" method="get">
           <h2 class="popup__title">Редактировать профиль</h2>
           <fieldset class="popup__data">
-            <input type="text" class="popup__input" id="name-field" name="name" placeholder="Имя" required>
-            <input type="text" class="popup__input" id="job-field" name="job" placeholder="Подпись" required>
+            <input type="text" class="popup__input" id="name-field" name="name" minlength="2" maxlength="40" placeholder="Имя" required>
+            <span class="popup__error" id="name-field-error"></span>
+            <input type="text" class="popup__input" id="job-field" name="job" minlength="2" maxlength="200" placeholder="Подпись" required>
+            <span class="popup__error" id="job-field-error"></span>
           </fieldset>
           <button type="submit" class="popup__button">Сохранить</button>      
         </form>  
@@ -74,8 +76,10 @@
         <form name="popup__form" class="popup__form" method="get">
           <h2 class="popup__title">Новое место</h2>
           <fieldset class="popup__data">
-            <input type="text" class="popup__input" id="place-name" name="place-name" placeholder="Название" required>
-            <input type="text" class="popup__input" id="place-link" name="place-link" placeholder="Ссылка на картинку" required>
+            <input type="text" class="popup__input" id="place-name" name="place-name" minlength="2" maxlength="30" placeholder="Название" required>
+            <span class="popup__error" id="place-name-error"></span>
+            <input type="url" class="popup__input" id="place-link" name="place-link" placeholder="Ссылка на картинку" required>
+            <span class="popup__error" id="place-link-error"></span>
           </fieldset>
           <button type="submit" class="popup__button">Создать</button>      
         </form>  
@@ -93,5 +97,6 @@
 
   </div>
   <script type="module" src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>

@@ -27,6 +27,9 @@ const jobInProfile = profileCard.querySelector(`.profile__subtitle`)
 const list = document.querySelector(`.cards`)
 const listElementTemplate = document.querySelector(`.template`);
 
+//переменная, для снятия эскейпа-листенера
+let currentOpenedPopup;
+
 function renderCards() {
   const cardsList = initialCards.map(getElement);
   list.append(...cardsList);
@@ -73,7 +76,8 @@ function openEditWindow() {
   jobInput.value = jobInProfile.textContent;
 
   openPopupWindow(popupEditWindow);
-}
+};
+
 function makeSubmitHandler (evt) {
   evt.preventDefault();
   nameInProfile.textContent = nameInput.value;
@@ -82,22 +86,39 @@ function makeSubmitHandler (evt) {
   closePopupWindow(popupEditWindow);
 }
 
+function listenToOpenedModal(e) {
+  if (e.target === e.currentTarget) {
+    closePopupWindow(e.target);
+  };
+};
+
+function escapeTrigger(e) {
+  if (e.key === "Escape") {
+    closePopupWindow(currentOpenedPopup);
+  };
+};
+
 // открыватель
 
 function openPopupWindow(popupWindow) {
   popupWindow.classList.add(`popup_opened`);
-}
+  currentOpenedPopup = popupWindow;
+  popupWindow.addEventListener("click", listenToOpenedModal);
+  document.addEventListener("keydown", escapeTrigger);
+};
 
 // закрыватель
 
 function closePopupWindow(popupWindow) {
   popupWindow.classList.remove(`popup_opened`);
-}
+  popupWindow.removeEventListener("click", listenToOpenedModal);
+  document.removeEventListener("keydown", escapeTrigger);
+};
 
 function handleClosePopup(evt) {
   const popupWindow = evt.target.closest(`.popup`);
   closePopupWindow(popupWindow);
-}
+};
 
 // слушатели
 
