@@ -27,6 +27,9 @@ const jobInProfile = profileCard.querySelector(`.profile__subtitle`)
 const list = document.querySelector(`.cards`)
 const listElementTemplate = document.querySelector(`.template`);
 
+//переменная, для снятия эскейпа-листенера
+let currentOpenedPopup;
+
 function renderCards() {
   const cardsList = initialCards.map(getElement);
   list.append(...cardsList);
@@ -89,35 +92,27 @@ function listenToOpenedModal(e) {
   };
 };
 
-function closeWithEscButton(popupWindow) {
-  document.addEventListener('keydown', (e) => 
-    checkPressedEscape(e, popupWindow)
-  );
-};
-
-function checkPressedEscape(e, popupWindow) {
-  if (e.key === 'Escape') {
-    closePopupWindow(popupWindow);
+function escapeTrigger(e) {
+  if (e.key === "Escape") {
+    closePopupWindow(currentOpenedPopup);
   };
-}
-
-//----------------------------------------удалить слушатель ЭСКЕЙПА ----------------------
+};
 
 // открыватель
 
-function openPopupWindow(popupWindow) { 
+function openPopupWindow(popupWindow) {
   popupWindow.classList.add(`popup_opened`);
-  popupWindow.addEventListener('click', listenToOpenedModal);
-  closeWithEscButton(popupWindow);
+  currentOpenedPopup = popupWindow;
+  popupWindow.addEventListener("click", listenToOpenedModal);
+  document.addEventListener("keydown", escapeTrigger);
 };
 
 // закрыватель
 
 function closePopupWindow(popupWindow) {
-  console.log(111);
   popupWindow.classList.remove(`popup_opened`);
-  popupWindow.removeEventListener('click', listenToOpenedModal);
-  document.removeEventListener('keydown', this);
+  popupWindow.removeEventListener("click", listenToOpenedModal);
+  document.removeEventListener("keydown", escapeTrigger);
 };
 
 function handleClosePopup(evt) {
