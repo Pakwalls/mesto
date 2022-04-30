@@ -15,7 +15,7 @@ function enableValidation(config) {
 function setEventListeners(form, config) {
   const inputs = Array.from(form.querySelectorAll(config.inputSelector));
   const buttonElement = form.querySelector(config.submitButtonSelector);
-
+  
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       toggleErrorMessage(form, inputElement, config);
@@ -58,14 +58,6 @@ function toggleButton(inputs, buttonElement, config) {
     buttonElement.classList.remove(config.inactiveButtonClass);
   };
 };
-
-
-
-
-
-
-
-
 
 
 enableValidation({

@@ -89,14 +89,15 @@ function listenToOpenedModal(e) {
   };
 };
 
-function listenToEscButton(popupWindow) {
-  document.addEventListener('keydown', function(evt) {
-    if (evt.key === 'Escape') {
+function closeWithEscButton(popupWindow) {
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
       closePopupWindow(popupWindow);
     };
   });
 };
 
+//----------------------------------------удалить слушатель ЭСКЕЙПА ----------------------
 
 // открыватель
 
@@ -106,7 +107,7 @@ function openPopupWindow(popupWindow) {
  
   popupWindow.classList.add(`popup_opened`);
   popupWindow.addEventListener('click', listenToOpenedModal);
-  listenToEscButton(popupWindow);
+  closeWithEscButton(popupWindow);
 };
 
 // открыватель модалок без кнопок
@@ -114,7 +115,7 @@ function openPopupWindow(popupWindow) {
 function openZoomWindow(popupWindow) {
   popupWindow.classList.add(`popup_opened`);
   popupWindow.addEventListener('click', listenToOpenedModal);
-  listenToEscButton(popupWindow);
+  closeWithEscButton(popupWindow);
 };
 
 // закрыватель
@@ -122,6 +123,7 @@ function openZoomWindow(popupWindow) {
 function closePopupWindow(popupWindow) {
   popupWindow.classList.remove(`popup_opened`);
   popupWindow.removeEventListener('click', listenToOpenedModal);
+
 };
 
 function handleClosePopup(evt) {
