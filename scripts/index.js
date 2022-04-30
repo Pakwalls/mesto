@@ -24,36 +24,36 @@ const captionZoom = popupZoom.querySelector(`.popup__figcaption`);
 const nameInProfile = profileCard.querySelector(`.profile__title`)
 const jobInProfile = profileCard.querySelector(`.profile__subtitle`)
 
-const list = document.querySelector(`.cards`)
+const cardElementsList = document.querySelector(`.cards`)
 const listElementTemplate = document.querySelector(`.template`);
 
 //переменная, для снятия эскейпа-листенера
 let currentOpenedPopup;
 
 function renderCards() {
-  const cardsList = initialCards.map(getElement);
-  list.append(...cardsList);
+  const cardsList = initialCards.map(createCardElement);
+  cardElementsList.append(...cardsList);
 }
 
-function getElement(item) {
+function createCardElement(cardData) {
   const cardClone = listElementTemplate.content.cloneNode(true);
   const name = cardClone.querySelector(`.article__title`);
   const image = cardClone.querySelector(`.article__img`);
   const delButton = cardClone.querySelector(`.article__del-btn`);
   const likeButton = cardClone.querySelector(`.article__feedback`);
 
-  likeButton.addEventListener('click', () => { likeButton.classList.toggle(`article__feedback_active`); })
+  likeButton.addEventListener('click', () => likeButton.classList.toggle(`article__feedback_active`));
   delButton.addEventListener('click', (evt) => evt.target.closest(`.article`).remove());
   image.addEventListener('click', function() { 
     openPopupWindow(popupZoom);
     imageZoom.src = image.src;
-    captionZoom.textContent = item.name;
+    captionZoom.textContent = cardData.name;
     imageZoom.alt = image.alt;
   });
   
-  name.textContent = item.name;
-  image.src = item.link;
-  image.alt = `Фотография ${item.name}`;
+  name.textContent = cardData.name;
+  image.src = cardData.link;
+  image.alt = `Фотография ${cardData.name}`;
   
   return cardClone;
 }
@@ -64,8 +64,8 @@ formAdd.addEventListener('submit', (evt) => {
     name: placeInput.value,
     link: placeLinkInput.value,
   };
-  const card = getElement(newCard);
-  list.prepend(card);
+  const card = createCardElement(newCard);
+  cardElementsList.prepend(card);
   
   closePopupWindow(popupAddWindow);
   formAdd.reset();
@@ -78,7 +78,7 @@ function openEditWindow() {
   openPopupWindow(popupEditWindow);
 };
 
-function makeSubmitHandler (evt) {
+function createFormSubmitHandler (evt) {
   evt.preventDefault();
   nameInProfile.textContent = nameInput.value;
   jobInProfile.textContent = jobInput.value;
@@ -115,21 +115,16 @@ function closePopupWindow(popupWindow) {
   document.removeEventListener("keydown", escapeTrigger);
 };
 
-function handleClosePopup(evt) {
-  const popupWindow = evt.target.closest(`.popup`);
-  closePopupWindow(popupWindow);
-};
-
 // слушатели
 
-formEdit.addEventListener('submit', makeSubmitHandler);
+formEdit.addEventListener('submit', createFormSubmitHandler);
 
 profileEditBtn.addEventListener('click', openEditWindow);
-editFormClosebtn.addEventListener('click', handleClosePopup);
+editFormClosebtn.addEventListener('click', (e) => closePopupWindow(e.target.closest(`.popup`))); // Я правильно понял твой коммент ?
 
 profileAddbtn.addEventListener('click', () => openPopupWindow(popupAddWindow));
-addFormCloseBtn.addEventListener('click', handleClosePopup);
+addFormCloseBtn.addEventListener('click', (e) => closePopupWindow(e.target.closest(`.popup`)));
 
-popupZoomCloseBtn.addEventListener('click', handleClosePopup);
+popupZoomCloseBtn.addEventListener('click', (e) => closePopupWindow(e.target.closest(`.popup`)));
 
 renderCards();
