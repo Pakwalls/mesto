@@ -42,7 +42,7 @@ function getElement(item) {
   likeButton.addEventListener('click', () => { likeButton.classList.toggle(`article__feedback_active`); })
   delButton.addEventListener('click', (evt) => evt.target.closest(`.article`).remove());
   image.addEventListener('click', function() { 
-    openPopupWindow(popupZoom);
+    openZoomWindow(popupZoom);
     imageZoom.src = image.src;
     captionZoom.textContent = item.name;
     imageZoom.alt = image.alt;
@@ -73,7 +73,8 @@ function openEditWindow() {
   jobInput.value = jobInProfile.textContent;
 
   openPopupWindow(popupEditWindow);
-}
+};
+
 function makeSubmitHandler (evt) {
   evt.preventDefault();
   nameInProfile.textContent = nameInput.value;
@@ -82,22 +83,51 @@ function makeSubmitHandler (evt) {
   closePopupWindow(popupEditWindow);
 }
 
+function listenToOpenedModal(e) {
+  if (e.target === e.currentTarget) {
+    closePopupWindow(e.target);
+  };
+};
+
+function listenToEscButton(popupWindow) {
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+      closePopupWindow(popupWindow);
+    };
+  });
+};
+
+
 // открыватель
 
 function openPopupWindow(popupWindow) {
+  const buttonElement = popupWindow.querySelector(`.popup__button`);
+  buttonElement.classList.add(`popup__button_disabled`);
+ 
   popupWindow.classList.add(`popup_opened`);
-}
+  popupWindow.addEventListener('click', listenToOpenedModal);
+  listenToEscButton(popupWindow);
+};
+
+// открыватель модалок без кнопок
+
+function openZoomWindow(popupWindow) {
+  popupWindow.classList.add(`popup_opened`);
+  popupWindow.addEventListener('click', listenToOpenedModal);
+  listenToEscButton(popupWindow);
+};
 
 // закрыватель
 
 function closePopupWindow(popupWindow) {
   popupWindow.classList.remove(`popup_opened`);
-}
+  popupWindow.removeEventListener('click', listenToOpenedModal);
+};
 
 function handleClosePopup(evt) {
   const popupWindow = evt.target.closest(`.popup`);
   closePopupWindow(popupWindow);
-}
+};
 
 // слушатели
 
