@@ -22,12 +22,12 @@ function enableValidation(config) {
 
 function setEventListeners(form, config) {
   const inputs = Array.from(form.querySelectorAll(config.inputSelector));
-  const buttonElement = form.querySelector(config.submitButtonSelector);
-  toggleButton(inputs, buttonElement, config);
+  toggleButtonCondidion(form);
+  
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       toggleErrorMessage(form, inputElement, config);
-      toggleButton(inputs, buttonElement, config);
+      toggleButtonCondidion(form);
     });
   });
 };
@@ -59,13 +59,15 @@ function hasInvalidInput(inputs) {
   return inputs.some((inputElement => !inputElement.validity.valid ))
 };
 
-function toggleButton(inputs, buttonElement, config) {
-  if (hasInvalidInput(inputs)) {
-    buttonElement.classList.add(config.inactiveButtonClass);
-  } else {
-    buttonElement.classList.remove(config.inactiveButtonClass);
-  };
-};
+export function toggleButtonCondidion(popupWindow) {
+  const button = popupWindow.querySelector(configData.submitButtonSelector);
+  const inputs = Array.from(popupWindow.querySelectorAll(configData.inputSelector));
 
+  if (hasInvalidInput(inputs)) {
+    button.classList.add(configData.inactiveButtonClass);
+  } else {
+    button.classList.remove(configData.inactiveButtonClass);
+  };
+}
 
 enableValidation(configData); 

@@ -1,4 +1,5 @@
-import {initialCards} from './cards.js';
+import { initialCards } from './cards.js';
+import { toggleButtonCondidion } from './validate.js';
 
 const profileCard = document.querySelector(`.profile`);
 const profileEditBtn = profileCard.querySelector(`.profile__edit-btn`);
@@ -65,10 +66,12 @@ formAdd.addEventListener('submit', (evt) => {
     link: placeLinkInput.value,
   };
   const card = createCardElement(newCard);
-  cardElementsList.prepend(card);
   
+  cardElementsList.prepend(card);
   closePopupWindow(popupAddWindow);
+ 
   formAdd.reset();
+  toggleButtonCondidion(formAdd);
 });
 
 function openEditWindow() {
