@@ -78,7 +78,7 @@ function openEditWindow() {
   openPopupWindow(popupEditWindow);
 };
 
-function createFormSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   nameInProfile.textContent = nameInput.value;
   jobInProfile.textContent = jobInput.value;
@@ -117,14 +117,14 @@ function closePopupWindow(popupWindow) {
 
 // слушатели
 
-formEdit.addEventListener('submit', createFormSubmitHandler);
+formEdit.addEventListener('submit', handleProfileFormSubmit);
 
 profileEditBtn.addEventListener('click', openEditWindow);
-editFormClosebtn.addEventListener('click', (e) => closePopupWindow(e.target.closest(`.popup`))); // Я правильно понял твой коммент ?
+editFormClosebtn.addEventListener('click', () => closePopupWindow(popupEditWindow)); // Спасибо 
 
 profileAddbtn.addEventListener('click', () => openPopupWindow(popupAddWindow));
-addFormCloseBtn.addEventListener('click', (e) => closePopupWindow(e.target.closest(`.popup`)));
+addFormCloseBtn.addEventListener('click', () => closePopupWindow(popupAddWindow));
 
-popupZoomCloseBtn.addEventListener('click', (e) => closePopupWindow(e.target.closest(`.popup`)));
+popupZoomCloseBtn.addEventListener('click', () => closePopupWindow(popupZoom));
 
 renderCards();
