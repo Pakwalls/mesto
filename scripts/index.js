@@ -1,4 +1,4 @@
-import { initialCards } from './cards.js';
+import { initialCards } from './initCards.js';
 import { toggleButtonCondidion } from './validate.js';
 
 const profileCard = document.querySelector(`.profile`);
