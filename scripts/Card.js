@@ -12,14 +12,14 @@ class Card {
   }
 
   //функция колбэк для удаления карточки
-  _delCardClickHandler() {
+  _deleteCardHandler() {
 
-  }
+  };
 
   //функция колбэк для лайка карточки
-  _handleFeedback() {
+  _likeCardHandler() {
 
-  }
+  };
 
   _getCard() {
     this._cardExample = this._template.cloneNode(true).querySelector(`.article`);
@@ -27,13 +27,15 @@ class Card {
     this._cardExample.querySelector(`.article__img`).src = this._image;
     this._cardExample.querySelector(`.article__img`).alt = `Фотография ${this._title}`;
 
-    this._cardExample.querySelector(`.article__del-btn`).addEventListener('click' () => {
-      //функция колбэк для удаления карточки
-    })
+    this._cardExample.querySelector(`.article__del-btn`).addEventListener('click', () => {
+      //колбэк для удаления карточки
+      this._deleteCardHandler();
+    });
 
-    this._cardExample.querySelector(`.article__feedback`).addEventListener('click' () => {
-      //функция колбэк для лайка карточки
-    })
+    this._cardExample.querySelector(`.article__feedback`).addEventListener('click', () => {
+      //колбэк для лайка карточки
+      this._likeCardHandler()
+    });
 
     return this._cardExample;
   }
