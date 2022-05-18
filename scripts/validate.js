@@ -4,7 +4,7 @@ const configData = {
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  errorClass: 'popup__error_visible',
 };
 
 function enableValidation(config) {
@@ -68,6 +68,6 @@ export function toggleButtonCondition(popupWindow) {
   } else {
     button.classList.remove(configData.inactiveButtonClass);
   };
-}
+};
 
 enableValidation(configData); 

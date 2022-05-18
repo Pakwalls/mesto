@@ -34,7 +34,7 @@ function handleFormAddSubmit(evt) {
   closePopupWindow(popupAddWindow);
   
   formAdd.reset();
-  toggleButtonCondition(formAdd);
+  toggleButtonCondition(formAdd); // подтянуть из FormValidator.js метод
 };
 
 function handleProfileFormSubmit (evt) {
@@ -53,7 +53,6 @@ function openEditWindow() {
 };
 
 // слушатели
-
 formAdd.addEventListener('submit', handleFormAddSubmit);
 formEdit.addEventListener('submit', handleProfileFormSubmit);
 
@@ -66,7 +65,6 @@ addFormCloseBtn.addEventListener('click', () => closePopupWindow(popupAddWindow)
 popupZoomCloseBtn.addEventListener('click', () => closePopupWindow(popupZoom));
 
 // прикрепление карт в стартовый экран
-
 initialCards.forEach((cardData) => {
   const card = new Card(cardData, `.template`);
   cardElementsList.append(card.showElement());
