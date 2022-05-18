@@ -1,37 +1,72 @@
-class Card {
-  _title;
-  _image;
+import { openPopupWindow } from './utils.js';
+import {popupZoom,
+        imageZoom,
+        captionZoom,} from './data.js';
+        
+export default class Card {
+  _name;
+  _link;
   _template;
-  _cardExample;
 
-  constructor(title, image, template) {
-    this._title = title;
-    this._image = image;
+  constructor(config, template) {
+    this._name = config.name;
+    this._alt = `Фотография ${this._name}`
+    this._link = config.link;
     this._template = template;
-  }
-
-  //функция колбэк для удаления карточки
-  _deleteCardHandler(e) {
-    e.preventDefault();
-    this.remove();
+    this._createCard();
   };
 
-  //функция конструктор карточки
-  _getCard() {
-    this._cardExample = this._template.cloneNode(true).querySelector(`.article`);
-    this._cardExample.querySelector(`.article__title`).textContent = this._title;
-    this._cardExample.querySelector(`.article__img`).src = this._image;
-    this._cardExample.querySelector(`.article__img`).alt = `Фотография ${this._title}`;
+  _getTemplate = () => {
+    const cardClone = 
+    document.querySelector(this._template).
+    content.querySelector(`.article`).
+    cloneNode(true);
 
-    this._cardExample.querySelector(`.article__del-btn`).addEventListener('click', () => {
-      //колбэк для удаления карточки
-      this._deleteCardHandler();
-    });
+    return cardClone;
+  };
+  
+  _zoomImage = () =>{
+    imageZoom.src = this._link;
+    captionZoom.textContent = this._name;
+    imageZoom.alt = this._alt;
+    openPopupWindow(popupZoom);
+  };
+  
+  _deleteCard = () => {
+    this.cardImage.removeEventListener('click', this._zoomImage);
+    this.likeBtn.removeEventListener('click', this._likeCard);   
+    this.delBtn.removeEventListener('click', this._deleteCard);
 
-    this._cardExample.querySelector(`.article__feedback`).addEventListener('click', () => {
-      this.classList.toggle(`article__feedback_active`);
-    });
+    this._element.remove();
+  };
+  
+  _likeCard = () => {
+    this.likeBtn.classList.toggle(`article__feedback_active`);
+  };
+  
+  _setEventListeners = () => {
 
-    return this._cardExample;
+    this.cardImage.addEventListener('click', this._zoomImage);
+    this.likeBtn.addEventListener('click', this._likeCard);   
+    this.delBtn.addEventListener('click', this._deleteCard);
+  };
+
+  _createCard = () => {
+    this._element = this._getTemplate();
+    this.cardName = this._element.querySelector(`.article__title`);
+    this.cardImage = this._element.querySelector(`.article__img`);
+    this.likeBtn = this._element.querySelector(`.article__feedback`);
+    this.delBtn = this._element.querySelector(`.article__del-btn`);
+    
+    this.cardName.textContent = this._name;
+
+    this.cardImage.src = this._link;
+    this.cardImage.alt = this._alt;
+
+    this._setEventListeners();
+  };
+
+  showElement = () => {
+    return this._element;
   }
 }

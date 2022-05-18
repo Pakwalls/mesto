@@ -22,12 +22,12 @@ function enableValidation(config) {
 
 function setEventListeners(form, config) {
   const inputs = Array.from(form.querySelectorAll(config.inputSelector));
-  toggleButtonCondidion(form);
+  toggleButtonCondition(form);
   
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       toggleErrorMessage(form, inputElement, config);
-      toggleButtonCondidion(form);
+      toggleButtonCondition(form);
     });
   });
 };
@@ -59,7 +59,7 @@ function hasInvalidInput(inputs) {
   return inputs.some((inputElement => !inputElement.validity.valid ))
 };
 
-export function toggleButtonCondidion(popupWindow) {
+export function toggleButtonCondition(popupWindow) {
   const button = popupWindow.querySelector(configData.submitButtonSelector);
   const inputs = Array.from(popupWindow.querySelectorAll(configData.inputSelector));
 
