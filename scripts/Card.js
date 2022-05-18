@@ -4,7 +4,6 @@ class Card {
   _template;
   _cardExample;
 
-
   constructor(title, image, template) {
     this._title = title;
     this._image = image;
@@ -12,15 +11,12 @@ class Card {
   }
 
   //функция колбэк для удаления карточки
-  _deleteCardHandler() {
-
+  _deleteCardHandler(e) {
+    e.preventDefault();
+    this.remove();
   };
 
-  //функция колбэк для лайка карточки
-  _likeCardHandler() {
-
-  };
-
+  //функция конструктор карточки
   _getCard() {
     this._cardExample = this._template.cloneNode(true).querySelector(`.article`);
     this._cardExample.querySelector(`.article__title`).textContent = this._title;
@@ -33,8 +29,7 @@ class Card {
     });
 
     this._cardExample.querySelector(`.article__feedback`).addEventListener('click', () => {
-      //колбэк для лайка карточки
-      this._likeCardHandler()
+      this.classList.toggle(`article__feedback_active`);
     });
 
     return this._cardExample;
