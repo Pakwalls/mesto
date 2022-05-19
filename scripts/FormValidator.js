@@ -1,65 +1,65 @@
 export class Validator {
-  
+  _config;
+  _form;
 
   constructor(config, form) {
-    this._formSelector = config.formSelector;
-    this._inputSelector = config.inputSelector;
-    this._submitButtonSelector = config.submitButtonSelector;
-    this._inactiveButtonClass = config.inactiveButtonClass;
-    this._inputErrorClass = config.inputErrorClass;
-    this._errorClass = config.errorClass;
+    this._config = config;
     this._form = form;
-    this._inputElements = Array.from(this._form.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
+    this._inputElements = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+    this._buttonElement = this._form.querySelector(this._config.submitButtonSelector);
   }
 
-  _setEventListeners = () => {
+  _setEventListeners = () => { 
+    this.toggleButtonCondition();
+    
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         //переключение видимости ошибки
-        this._toggleErrorMessage(formElement, inputElement)
+        this._toggleErrorMessage(inputElement)
         //переключение состояни кнопки
         this.toggleButtonCondition()
       })
     })
   };
 
-  _toggleErrorMessage = (formElement, inputElement) => {
+  _toggleErrorMessage = (inputElement) => {
     if (!inputElement.validity.valid) {
-      this._showInputError(formElement, inputElement);
+      this._showInputError(inputElement);
     } else {
-      this._hideInputError(formElement, inputElement);
+      this._hideInputError(inputElement);
     };
   };
   
-  _showInputError = (formElement, inputElement) => {
-    const {validationMessage} = inputElement;
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add(this._inputErrorClass);
+  _showInputError = (inputElement) => {
+    const { validationMessage } = inputElement;
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.add(this._config.inputErrorClass);
     errorElement.textContent = validationMessage;
-    errorElement.classList.add(this._errorClass);
+    errorElement.classList.add(this._config.errorClass);
   };
 
-  _hasInvalidInput = (formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(this._inputErrorClass);
+  _hideInputError = (inputElement) => {
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.textContent = '';
-    errorElement.classList.remove(this._errorClass);
+    errorElement.classList.remove(this._config.errorClass);
   };
 
-  _hideInputError = () => {
+  _hasInvalidInput = () => {
+  // проверять не все елементы
     return this._inputElements.some((inputElement => !inputElement.validity.valid ))
   };
 
   toggleButtonCondition = () => {
-    if (this._hideInputError) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
+    if (this._hasInvalidInput()) {
+      this._buttonElement.classList.add(this._config.inactiveButtonClass);
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.classList.remove(this._config.inactiveButtonClass);
     }
   };
 
   enableValidation = () => {
-
+    this._setEventListeners(this._form, this._config);
   };
 }
+  

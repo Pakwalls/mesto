@@ -1,7 +1,7 @@
 import { initialCards } from './initCards.js';
-import { toggleButtonCondition } from './validate.js';
 import Card from './Card.js';
 import { openPopupWindow, closePopupWindow } from './utils.js';
+import { Validator } from './FormValidator.js';
 import {
   profileEditBtn,
   profileAddbtn,
@@ -20,10 +20,13 @@ import {
   nameInProfile,
   jobInProfile,
   cardElementsList,
+  configData,
 } from './data.js';
 
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
+  const validate = new Validator(configData, formAdd)
+
   const newCard = {
     name: placeInput.value,
     link: placeLinkInput.value,
@@ -34,7 +37,7 @@ function handleFormAddSubmit(evt) {
   closePopupWindow(popupAddWindow);
   
   formAdd.reset();
-  toggleButtonCondition(formAdd); // подтянуть из FormValidator.js метод
+  validate.toggleButtonCondition(); // подтянут из FormValidator.js метод
 };
 
 function handleProfileFormSubmit (evt) {
@@ -69,3 +72,10 @@ initialCards.forEach((cardData) => {
   const card = new Card(cardData, `.template`);
   cardElementsList.append(card.showElement());
 })
+
+// включение валидации
+const forms = document.querySelectorAll(configData.formSelector)
+forms.forEach((form) => {
+  const validate = new Validator(configData, form)
+  validate.enableValidation()
+}) 

@@ -1,3 +1,5 @@
+// константы
+
 export const profileCard = document.querySelector(`.profile`);
 export const profileEditBtn = profileCard.querySelector(`.profile__edit-btn`);
 export const profileAddbtn = profileCard.querySelector(`.profile__add-btn`);
@@ -24,3 +26,15 @@ export const jobInProfile = profileCard.querySelector(`.profile__subtitle`)
 
 export const cardElementsList = document.querySelector(`.cards`)
 export const listElementTemplate = document.querySelector(`.template`);
+
+
+// конфиг для валидации
+
+export const configData = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
