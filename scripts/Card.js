@@ -8,17 +8,17 @@ export default class Card {
   _link;
   _template;
 
-  constructor(config, template) {
+  constructor(config, templateSelector) {
     this._name = config.name;
     this._alt = `Фотография ${this._name}`
     this._link = config.link;
-    this._template = template;
+    this._templateSelector = templateSelector;
     this._createCard();
   };
 
   _getTemplate = () => {
     const cardClone = 
-    document.querySelector(this._template).
+    document.querySelector(this._templateSelector).
     content.querySelector(`.article`).
     cloneNode(true);
 
@@ -33,10 +33,6 @@ export default class Card {
   };
   
   _deleteCard = () => {
-    this.cardImage.removeEventListener('click', this._zoomImage);
-    this.likeBtn.removeEventListener('click', this._likeCard);   
-    this.delBtn.removeEventListener('click', this._deleteCard);
-
     this._element.remove();
   };
   
