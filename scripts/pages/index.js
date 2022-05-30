@@ -1,7 +1,7 @@
-import { initialCards } from './initCards.js';
-import Card from './Card.js';
-import { openPopupWindow, closePopupWindow } from './utils.js';
-import { Validator } from './FormValidator.js';
+import { initialCards } from '../utils/initCards.js';
+import Card from '../components/Card.js';
+import { openPopupWindow, closePopupWindow } from '../utils/utils.js';
+import { Validator } from '../components/FormValidator.js';
 import {
   profileEditBtn,
   profileAddbtn,
@@ -21,7 +21,7 @@ import {
   jobInProfile,
   cardElementsList,
   configData,
-} from './data.js';
+} from '../utils/data.js';
 
 function handleFormAddSubmit(evt) {
   evt.preventDefault();

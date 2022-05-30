@@ -1,7 +1,7 @@
-import { openPopupWindow } from './utils.js';
+import { openPopupWindow } from '../utils/utils.js';
 import {popupZoom,
         imageZoom,
-        captionZoom,} from './data.js';
+        captionZoom,} from '../utils/data.js';
         
 export default class Card {
   _name;
