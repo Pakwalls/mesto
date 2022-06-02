@@ -22,6 +22,7 @@ import {
   cardElementsList,
   configData,
 } from '../utils/data.js';
+import Section from '../components/Section.js';
 
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
@@ -68,10 +69,22 @@ addFormCloseBtn.addEventListener('click', () => closePopupWindow(popupAddWindow)
 popupZoomCloseBtn.addEventListener('click', () => closePopupWindow(popupZoom));
 
 // прикрепление карт в стартовый экран
-initialCards.forEach((cardData) => {
-  const card = new Card(cardData, `.template`);
-  cardElementsList.append(card.showElement());
-})
+const cardList = new Section({ 
+  items: initialCards,
+  renderer: (cardItem) => {
+    const card = new Card(cardItem, `.template`);
+    const cardElement = card.showElement();
+    
+    cardList.addItem(cardElement);
+    },
+  },
+  cardElementsList);
+cardList.renderItems();
+
+// initialCards.forEach((cardData) => {
+//   const card = new Card(cardData, `.template`);
+//   cardElementsList.append(card.showElement());
+// })
 
 // включение валидации
 const forms = document.querySelectorAll(configData.formSelector)
