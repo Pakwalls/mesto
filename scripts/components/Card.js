@@ -2,6 +2,8 @@ import { openPopupWindow } from '../utils/utils.js';
 import {popupZoom,
         imageZoom,
         captionZoom,} from '../utils/data.js';
+import PopupWithImage from './PopupWithImage.js';
+
         
 export default class Card {
   _name;
@@ -25,12 +27,7 @@ export default class Card {
     return cardClone;
   };
   
-  // _zoomImage = () =>{
-  //   imageZoom.src = this._link;
-  //   captionZoom.textContent = this._name;
-  //   imageZoom.alt = this._alt;
-  //   openPopupWindow(popupZoom);
-  // };
+  
   
   _deleteCard = () => {
     this._element.remove();
@@ -42,7 +39,14 @@ export default class Card {
   
   _setEventListeners = () => {
 
-    this.cardImage.addEventListener('click', this._zoomImage);
+    // this.cardImage.addEventListener('click', this._zoomImage);
+    this.cardImage.addEventListener('click', () => {
+      const popup = new PopupWithImage(`.popup_type_show`);
+      popup.open({
+        name: this._name,
+        link: this._link,
+      })
+    });
     this.likeBtn.addEventListener('click', this._likeCard);   
     this.delBtn.addEventListener('click', this._deleteCard);
   };
