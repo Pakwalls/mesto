@@ -56,7 +56,7 @@ function openEditWindow() {
   openPopupWindow(popupEditWindow);
 };
 
-// слушатели
+// ---------------------------------------------------------------------------------- слушатели
 formAdd.addEventListener('submit', handleFormAddSubmit);
 formEdit.addEventListener('submit', handleProfileFormSubmit);
 
@@ -68,7 +68,7 @@ addFormCloseBtn.addEventListener('click', () => closePopupWindow(popupAddWindow)
 
 popupZoomCloseBtn.addEventListener('click', () => closePopupWindow(popupZoom));
 
-// прикрепление карт в стартовый экран
+// ---------------------------------------------------------------------------------- сбор карт в контейнер секции
 const cardList = new Section({ 
   items: initialCards,
   renderer: (cardItem) => {
@@ -81,12 +81,7 @@ const cardList = new Section({
   cardElementsList);
 cardList.renderItems();
 
-// initialCards.forEach((cardData) => {
-//   const card = new Card(cardData, `.template`);
-//   cardElementsList.append(card.showElement());
-// })
-
-// включение валидации
+// ---------------------------------------------------------------------------------- включение валидации
 const forms = document.querySelectorAll(configData.formSelector)
 forms.forEach((form) => {
   const validate = new Validator(configData, form)
