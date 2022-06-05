@@ -23,7 +23,9 @@ import {
   configData,
 } from '../utils/data.js';
 import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
+// ---------------------------------------------------------------------------------- увеличить изображение
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
   const validate = new Validator(configData, formAdd)

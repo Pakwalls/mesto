@@ -25,12 +25,12 @@ export default class Card {
     return cardClone;
   };
   
-  _zoomImage = () =>{
-    imageZoom.src = this._link;
-    captionZoom.textContent = this._name;
-    imageZoom.alt = this._alt;
-    openPopupWindow(popupZoom);
-  };
+  // _zoomImage = () =>{
+  //   imageZoom.src = this._link;
+  //   captionZoom.textContent = this._name;
+  //   imageZoom.alt = this._alt;
+  //   openPopupWindow(popupZoom);
+  // };
   
   _deleteCard = () => {
     this._element.remove();
