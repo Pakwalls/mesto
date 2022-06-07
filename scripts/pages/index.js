@@ -19,7 +19,7 @@ import UserInfo from '../components/UserInfo.js';
 const cardList = new Section({ 
   items: initialCards,
   renderer: (cardItem) => {
-    const card = new Card(cardItem, `.template`);
+    const card = new Card(cardItem, `.template`, () => popupWithImage.open(cardItem));
     const cardElement = card.showElement();
     
     cardList.addItem(cardElement);
@@ -36,7 +36,7 @@ profileAddbtn.addEventListener(`click`, () => {
 const popupWithForm = new PopupWithForm(
   `.popup_type_add-form`, 
   (data) => {
-    const createdCard = new Card({name: data["place-name"], link: data["place-link"]}, `.template`);
+    const createdCard = new Card({name: data["place-name"], link: data["place-link"]}, `.template`, () => popupWithImage.open({name: data["place-name"], link: data["place-link"]}));
     const cardElement = createdCard.showElement();
     
     cardList.prependItem(cardElement);
