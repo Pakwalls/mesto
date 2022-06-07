@@ -1,18 +1,13 @@
-import { openPopupWindow } from './utils.js';
-import {popupZoom,
-        imageZoom,
-        captionZoom,} from './data.js';
-        
+import PopupWithImage from './PopupWithImage.js';
+      
 export default class Card {
-  _name;
-  _link;
-  _template;
 
-  constructor(config, templateSelector) {
+  constructor(config, templateSelector, handleCardClick) {
     this._name = config.name;
     this._alt = `Фотография ${this._name}`
     this._link = config.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
     this._createCard();
   };
 
@@ -25,13 +20,6 @@ export default class Card {
     return cardClone;
   };
   
-  _zoomImage = () =>{
-    imageZoom.src = this._link;
-    captionZoom.textContent = this._name;
-    imageZoom.alt = this._alt;
-    openPopupWindow(popupZoom);
-  };
-  
   _deleteCard = () => {
     this._element.remove();
   };
@@ -42,7 +30,7 @@ export default class Card {
   
   _setEventListeners = () => {
 
-    this.cardImage.addEventListener('click', this._zoomImage);
+    this.cardImage.addEventListener('click', this._handleCardClick);
     this.likeBtn.addEventListener('click', this._likeCard);   
     this.delBtn.addEventListener('click', this._deleteCard);
   };
