@@ -26,8 +26,9 @@ import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import { UserInfo } from '../components/UserInfo.js';
 
-// ---------------------------------------------------------------------------------- сбор карт в контейнер секции
+// ---------------------------------------------------------------------------------- собрать карты в контейнер секции
 const cardList = new Section({ 
   items: initialCards,
   renderer: (cardItem) => {
@@ -40,7 +41,7 @@ const cardList = new Section({
   cardElementsList);
 cardList.renderItems();
 
-// ---------------------------------------------------------------------------------- создать карточку по кнопке
+// ---------------------------------------------------------------------------------- создать карточку по клику на кнопку добавить
 profileAddbtn.addEventListener(`click`, () => {
   popupWithForm.open();
 });
@@ -51,13 +52,36 @@ const popupWithForm = new PopupWithForm(
     const createdCard = new Card({name: data["place-name"], link: data["place-link"]}, `.template`);
     const cardElement = createdCard.showElement();
     
-    cardList.addItem(cardElement);
+    cardList.prependItem(cardElement);
   });
 popupWithForm.setEventListeners();
 
-// ---------------------------------------------------------------------------------- увеличить изображение
+// ---------------------------------------------------------------------------------- увеличить изображение карточки
 const popupWithImage = new PopupWithImage(`.popup_type_show`);
 popupWithImage.setEventListeners();
+
+// ---------------------------------------------------------------------------------- изменить данные в карточке профиля
+
+const userInfo = new UserInfo({userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle'});
+
+const profileForm = new PopupWithForm(
+  '.popup_type_edit-form',
+  (data) => {
+    userInfo.setUserInfo(data);
+  });
+profileForm.setEventListeners();
+
+profileEditBtn.addEventListener('click', () => {
+  const userData = userInfo.getUserInfo();
+
+  nameInput.value = userData.nameContent;
+  jobInput.value = userData.jobContent;
+
+  profileForm.open();
+})
+
+
+
 
 // ---------------------------------------------------------------------------------- 
 // function handleFormAddSubmit(evt) {

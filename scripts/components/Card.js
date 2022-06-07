@@ -6,9 +6,6 @@ import PopupWithImage from './PopupWithImage.js';
 
         
 export default class Card {
-  _name;
-  _link;
-  _template;
 
   constructor(config, templateSelector) {
     this._name = config.name;
@@ -27,8 +24,6 @@ export default class Card {
     return cardClone;
   };
   
-  
-  
   _deleteCard = () => {
     this._element.remove();
   };
@@ -39,7 +34,6 @@ export default class Card {
   
   _setEventListeners = () => {
 
-    // this.cardImage.addEventListener('click', this._zoomImage);
     this.cardImage.addEventListener('click', () => {
       const popup = new PopupWithImage(`.popup_type_show`);
       popup.open({
