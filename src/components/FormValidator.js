@@ -1,7 +1,4 @@
 export class Validator {
-  _config;
-  _form;
-
   constructor(config, form) {
     this._config = config;
     this._form = form;
@@ -50,14 +47,14 @@ export class Validator {
     return this._inputElements.some((inputElement => !inputElement.validity.valid ))
   };
 
-  disableSubmitButton = () => {
-    this._buttonElement.classList.add(this._config.inactiveButtonClass);
-    this._buttonElement.disabled = true;
-  }
-
   _enableSubmitButton = () => {
     this._buttonElement.classList.remove(this._config.inactiveButtonClass);
     this._buttonElement.disabled = false;
+  }
+
+  disableSubmitButton = () => {
+    this._buttonElement.classList.add(this._config.inactiveButtonClass);
+    this._buttonElement.disabled = true;
   }
 
   toggleButtonCondition = () => {

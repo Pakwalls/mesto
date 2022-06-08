@@ -1,8 +1,6 @@
 export default class Popup {
     constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
-    
-    this._closeButton = this._popupElement.querySelector(`.popup__closer`);
     this._bindedEscCloseHandler = this._handleEscClose.bind(this);
   }
   
@@ -15,7 +13,7 @@ export default class Popup {
 
   // -------------------------------------------- метод закрытия попапа кликом на оверлей (исключая контейнер)
   _handleCurrentTarget = (e) => {
-    if (e.target === e.currentTarget) {
+    if (e.target === e.currentTarget || e.target.classList.contains(`popup__closer`)) {
       this.close();
     };
   }
@@ -32,6 +30,5 @@ export default class Popup {
 
   setEventListeners() {
     this._popupElement.addEventListener('click', (e) => this._handleCurrentTarget(e));
-    this._closeButton.addEventListener('click', () => this.close());
   }
 }
