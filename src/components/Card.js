@@ -1,27 +1,23 @@
-import PopupWithImage from './PopupWithImage.js';
-      
 export default class Card {
 
   constructor(config, templateSelector, handleCardClick) {
     this._name = config.name;
-    this._alt = `Фотография ${this._name}`
+    this._alt = this._name;
     this._link = config.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
-    this._createCard();
   };
 
   _getTemplate = () => {
-    const cardClone = 
-    document.querySelector(this._templateSelector).
-    content.querySelector(`.article`).
-    cloneNode(true);
-
-    return cardClone;
+    return  document.querySelector(this._templateSelector)
+    .content
+    .querySelector(`.article`)
+    .cloneNode(true);
   };
   
   _deleteCard = () => {
     this._element.remove();
+    this._element = null;
   };
   
   _likeCard = () => {
@@ -51,6 +47,7 @@ export default class Card {
   };
 
   showElement = () => {
+    this._createCard();
     return this._element;
   }
 }

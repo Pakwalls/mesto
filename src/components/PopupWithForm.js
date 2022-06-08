@@ -1,4 +1,3 @@
-
 import Popup from './Popup.js';
 import { configData } from '../utils/data.js'
 

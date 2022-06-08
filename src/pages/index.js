@@ -6,7 +6,6 @@ import {
   profileAddbtn,
   nameInput,
   jobInput,
-  cardElementsList,
   configData,
 } from '../utils/data.js';
 
@@ -16,36 +15,35 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 
-// ---------------------------------------------------------------------------------- собрать карты в контейнер секции
+// ----------------------------------------------------------------------------------
+const createdCardElement = (data, selector) => {
+  const card = new Card(data, selector, () => popupWithImage.open(data));
+  const cardElement = card.showElement();
+
+  return cardElement;
+};
+
+// ----------------------------------------------------------------------------------
 const cardList = new Section({ 
   items: initialCards,
-  renderer: (cardItem) => {
-    const card = new Card(cardItem, `.template`, () => popupWithImage.open(cardItem));
-    const cardElement = card.showElement();
-    
-    cardList.addItem(cardElement);
-    },
-  },
-  cardElementsList);
+  renderer: (cardItem) => { return createdCardElement(cardItem, `.template`) }},
+  `.cards`);
+
 cardList.renderItems();
 
-// ---------------------------------------------------------------------------------- создать карточку по клику на кнопку добавить
-profileAddbtn.addEventListener(`click`, () => {
-  popupWithForm.open();
-});
-
+// ----------------------------------------------------------------------------------
 const popupWithForm = new PopupWithForm(
   `.popup_type_add-form`, 
   (data) => {
-    const createdCard = new Card({name: data["place-name"], link: data["place-link"]}, `.template`, () => popupWithImage.open({name: data["place-name"], link: data["place-link"]}));
-    const cardElement = createdCard.showElement();
-    
-    cardList.prependItem(cardElement);
+    const createdCard = createdCardElement({name: data["place-name"], link: data["place-link"]}, `.template`);
+    cardList.prependItem(createdCard);
   });
+
 popupWithForm.setEventListeners();
 
 // ---------------------------------------------------------------------------------- увеличить изображение карточки
 const popupWithImage = new PopupWithImage(`.popup_type_show`);
+
 popupWithImage.setEventListeners();
 
 // ---------------------------------------------------------------------------------- изменить данные в карточке профиля
@@ -73,4 +71,10 @@ const forms = document.querySelectorAll(configData.formSelector)
 forms.forEach((form) => {
   const validate = new Validator(configData, form)
   validate.enableValidation()
-}) 
+})
+
+// ---------------------------------------------------------------------------------- слушатели слушают
+
+profileAddbtn.addEventListener(`click`, () => {
+  popupWithForm.open();
+});
