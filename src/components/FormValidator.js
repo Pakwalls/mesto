@@ -52,6 +52,12 @@ export class Validator {
     this._buttonElement.disabled = false;
   }
 
+  hideError = () => {
+    this._inputElements.forEach((input) => {
+      this._hideInputError(input);
+    });
+  }
+
   disableSubmitButton = () => {
     this._buttonElement.classList.add(this._config.inactiveButtonClass);
     this._buttonElement.disabled = true;

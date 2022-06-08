@@ -29,6 +29,6 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupElement.addEventListener('click', (e) => this._handleCurrentTarget(e));
+    this._popupElement.addEventListener('mousedown', (e) => this._handleCurrentTarget(e));
   }
 }
