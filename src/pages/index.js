@@ -18,15 +18,17 @@ import UserInfo from '../components/UserInfo.js';
 // ----------------------------------------------------------------------------------
 const createdCardElement = (data, selector) => {
   const card = new Card(data, selector, () => popupWithImage.open(data));
-  const cardElement = card.showElement();
-
-  return cardElement;
+  return card.showElement();
 };
 
 // ----------------------------------------------------------------------------------
-const cardList = new Section({ 
+const cardList = new Section(
+  { 
   items: initialCards,
-  renderer: (cardItem) => { return createdCardElement(cardItem, `.template`) }},
+  renderer: (cardItem) => { 
+    const card = createdCardElement(cardItem, `.template`)
+    cardList.addItem(card); }
+  },
   `.cards`);
 cardList.renderItems();
 
