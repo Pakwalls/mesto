@@ -19,7 +19,10 @@
     <main class="content">
       <section class="profile">
         <div class="profile__card">
-          <img src="<%=require('./images/avatar.png')%>" alt="аватар карточки пользователя" class="profile__img">
+          <div class="profile__avatar">
+            <img src="<%=require('./images/avatar.png')%>" alt="аватар карточки пользователя" class="profile__img">
+            <button type="button" class="profile__img-changer"></button>
+          </div>
           <div class="profile__description">
             <div class="profile__title-box">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -48,7 +51,10 @@
         <img src="#" alt="#" class="article__img">
         <div class="article__nameplate">
           <h2 class="article__title"></h2>
-          <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
+          <div class="article__like-field">
+            <button type="button" aria-label="like-button" name="article__feedback" class="article__feedback"></button>
+            <p class="article__like-counter">0</p>
+          </div>
         </div>
         <button type="button" aria-label="delete-button" name="article__del-btn" class="article__del-btn hover-animated"></button>
       </li>
@@ -85,6 +91,7 @@
         </form>  
       </div>
     </div>
+    
     
     <div class="popup popup_type_show">
       <figure class="popup__figure">

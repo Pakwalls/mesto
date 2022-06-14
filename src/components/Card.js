@@ -37,6 +37,7 @@ export default class Card {
     this.cardImage = this._element.querySelector(`.article__img`);
     this.likeBtn = this._element.querySelector(`.article__feedback`);
     this.delBtn = this._element.querySelector(`.article__del-btn`);
+    this.likeCount = this._element.querySelector(`.article__like-counter`)
     
     this.cardName.textContent = this._name;
 
