@@ -4,6 +4,7 @@ import { Validator } from '../components/FormValidator.js';
 import {
   profileEditBtn,
   profileAddbtn,
+  avatarEditbtn,
   nameInput,
   jobInput,
   configData,
@@ -19,11 +20,24 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 
 // ----------------------------------------------------------------------------------
+const api = new Api()
+
+// ----------------------------------------------------------------------------------
+const popupWithAvatarLink = new PopupWithForm(
+  `.popup_type_avatar-form`,
+  (data) => {
+    api.patchAvatar(data.link).then(res => {
+      document.querySelector(".profile__img").setAttribute("src", res.avatar)
+    })
+  }
+)
+popupWithAvatarLink.setEventListeners();
+
+// ----------------------------------------------------------------------------------
 const createdCardElement = (data, selector) => {
   const card = new Card(data, selector, () => popupWithImage.open(data));
   return card.showElement();
 };
-const api = new Api()
 
 // ----------------------------------------------------------------------------------
 const cardList = new Section(
@@ -87,6 +101,10 @@ const resetForm = (form) => {
 }
 
 // ---------------------------------------------------------------------------------- слушатели слушают
+avatarEditbtn.addEventListener('click', () => {
+  popupWithAvatarLink.open();
+})
+
 profileEditBtn.addEventListener('click', () => fillProfilePopup());
 
 profileAddbtn.addEventListener(`click`, () => {

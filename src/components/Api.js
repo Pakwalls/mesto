@@ -45,14 +45,36 @@ export default class Api {
       })
   }
 
+  patchAvatar(avatar) {
+    return fetch(this._api + "/users/me/avatar", {
+      method: 'PATCH',
+      headers: {
+        "Authorization": this._token,
+        "Content-type": this._contentType,
+      },
+      body: JSON.stringify({
+        avatar
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        // return Promise.reject('Возник Error');
+      })
+      .catch(err => console.log(err))
+  }
+
+
+
   fetchCardsList() {
   }
 
   updateLikes(cardID) {
   }
 
-  updateAvatar(avatar) {
-  }
+
 
   deleteCard(avatar) {
 

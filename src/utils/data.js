@@ -3,6 +3,7 @@
 export const profileCard = document.querySelector(`.profile`);
 export const profileEditBtn = profileCard.querySelector(`.profile__edit-btn`);
 export const profileAddbtn = profileCard.querySelector(`.profile__add-btn`);
+export const avatarEditbtn = profileCard.querySelector(`.profile__img-changer`)
 
 export const popupEditWindow = document.querySelector(`.popup_type_edit-form`);
 export const formEdit = popupEditWindow.querySelector(`.popup__form`);
