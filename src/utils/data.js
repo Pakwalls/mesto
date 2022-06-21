@@ -1,6 +1,7 @@
 // константы
 
 export const profileCard = document.querySelector(`.profile`);
+export const profileImage = profileCard.querySelector(`.profile__img`);
 export const profileEditBtn = profileCard.querySelector(`.profile__edit-btn`);
 export const profileAddbtn = profileCard.querySelector(`.profile__add-btn`);
 export const avatarEditbtn = profileCard.querySelector(`.profile__img-changer`)

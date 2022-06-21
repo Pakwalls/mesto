@@ -61,14 +61,25 @@ export default class Api {
           return res.json();
         }
 
-        // return Promise.reject('Возник Error');
+        return Promise.reject('Возник Error');
       })
-      .catch(err => console.log(err))
   }
 
-
-
   fetchCardsList() {
+    return fetch(this._api + "/cards", {
+      method: 'GET',
+      headers: {
+        "Authorization": this._token,
+        "Content-type": this._contentType,
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject('Возник Error');
+      })
   }
 
   updateLikes(cardID) {

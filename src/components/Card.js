@@ -6,6 +6,7 @@ export default class Card {
     this._link = config.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._likeCount = config.likes.length;
   };
 
   _getTemplate = () => {
@@ -43,6 +44,8 @@ export default class Card {
 
     this.cardImage.src = this._link;
     this.cardImage.alt = this._alt;
+
+    this.likeCount.textContent = this._likeCount;
 
     this._setEventListeners();
   };

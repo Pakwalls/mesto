@@ -1,3 +1,5 @@
+import {profileImage} from '../utils/data.js'
+
 export default class UserInfo {
   constructor({ userNameSelector, userJobSelector }, loadUserInfo) {
     this._userName = document.querySelector(userNameSelector);
@@ -8,6 +10,7 @@ export default class UserInfo {
   initUserData() {
     this._loadUserInfo().then((data) => {
       this.setUserInfo({name: data.name, job: data.about});
+      profileImage.setAttribute('src', data.avatar);
     })
   }
 

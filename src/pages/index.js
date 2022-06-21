@@ -23,6 +23,19 @@ import UserInfo from '../components/UserInfo.js';
 const api = new Api()
 
 // ----------------------------------------------------------------------------------
+api.fetchCardsList().then(res => {
+  const cardList = new Section(
+      {
+      items: res,
+      renderer: (cardItem) => {
+        const card = createdCardElement(cardItem, `.template`)
+        cardList.addItem(card); }
+      },
+      `.cards`);
+    cardList.renderItems();
+})
+
+// ----------------------------------------------------------------------------------
 const popupWithAvatarLink = new PopupWithForm(
   `.popup_type_avatar-form`,
   (data) => {
@@ -38,17 +51,6 @@ const createdCardElement = (data, selector) => {
   const card = new Card(data, selector, () => popupWithImage.open(data));
   return card.showElement();
 };
-
-// ----------------------------------------------------------------------------------
-const cardList = new Section(
-  { 
-  items: initialCards,
-  renderer: (cardItem) => { 
-    const card = createdCardElement(cardItem, `.template`)
-    cardList.addItem(card); }
-  },
-  `.cards`);
-cardList.renderItems();
 
 // ----------------------------------------------------------------------------------
 const popupWithForm = new PopupWithForm(
