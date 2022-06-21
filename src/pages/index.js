@@ -9,6 +9,9 @@ import {
   configData,
 } from '../utils/data.js';
 
+
+import Api from "../components/Api.js"
+
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -20,6 +23,7 @@ const createdCardElement = (data, selector) => {
   const card = new Card(data, selector, () => popupWithImage.open(data));
   return card.showElement();
 };
+const api = new Api()
 
 // ----------------------------------------------------------------------------------
 const cardList = new Section(
@@ -46,12 +50,14 @@ const popupWithImage = new PopupWithImage(`.popup_type_show`);
 popupWithImage.setEventListeners();
 
 // ----------------------------------------------------------------------------------
-const userInfo = new UserInfo({userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle'});
+const userInfo = new UserInfo({userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle'}, () => api.fetchUserInfo());
+userInfo.initUserData();
 
 const profileForm = new PopupWithForm(
   '.popup_type_edit-form',
   (data) => {
     userInfo.setUserInfo(data);
+    api.patchUserInfo(data.name, data.job);
   });
 profileForm.setEventListeners();
 
@@ -87,32 +93,3 @@ profileAddbtn.addEventListener(`click`, () => {
   resetForm(popupWithForm.getForm());
   popupWithForm.open();
 });
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Данные по юзеру
-
-import { token } from '../utils/data.js';
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-43/users/me', {
-  method: 'GET',
-  headers: {
-    authorization: token,
-  },
-})
-  .then((res) => res.json())
-  .then((data) => console.log(data.name, data.about, data.avatar))
-  .catch((err) => console.log(err))
-
-  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Данные по карточкам
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-43/cards', {
-  method: 'GET',
-  headers: {
-    authorization: token,
-  },
-})
-  .then((res) => res.json())
-  .then((data) => console.log(data))
-  .catch((err) => console.log(err))
-
