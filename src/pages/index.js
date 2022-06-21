@@ -87,3 +87,32 @@ profileAddbtn.addEventListener(`click`, () => {
   resetForm(popupWithForm.getForm());
   popupWithForm.open();
 });
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Данные по юзеру
+
+import { token } from '../utils/data.js';
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-43/users/me', {
+  method: 'GET',
+  headers: {
+    authorization: token,
+  },
+})
+  .then((res) => res.json())
+  .then((data) => console.log(data.name, data.about, data.avatar))
+  .catch((err) => console.log(err))
+
+  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Данные по карточкам
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-43/cards', {
+  method: 'GET',
+  headers: {
+    authorization: token,
+  },
+})
+  .then((res) => res.json())
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err))
+

@@ -19,3 +19,7 @@ export const configData = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 };
+
+// ключ доступа
+
+export const token = 'e83bfb0b-39a4-4091-80ad-3cab13ababb8';
