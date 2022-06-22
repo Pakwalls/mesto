@@ -1,5 +1,4 @@
 import './index.css';
-import { initialCards } from '../utils/initCards.js';
 import { Validator } from '../components/FormValidator.js';
 import {
   profileEditBtn,
@@ -22,18 +21,18 @@ import UserInfo from '../components/UserInfo.js';
 // ----------------------------------------------------------------------------------
 const api = new Api()
 
+const cardList = new Section(
+  (cardItem) => {
+    return createCardElement(cardItem, `.template`);
+  },
+  `.cards`);
 // ----------------------------------------------------------------------------------
-api.fetchCardsList().then(res => {
-  const cardList = new Section(
-      {
-      items: res,
-      renderer: (cardItem) => {
-        const card = createdCardElement(cardItem, `.template`)
-        cardList.addItem(card); }
-      },
-      `.cards`);
-    cardList.renderItems();
-})
+
+api.fetchCardsList()
+  .then(res => {
+    cardList.renderItems(res);
+  })
+  .catch((err) => console.log(err));
 
 // ----------------------------------------------------------------------------------
 const popupWithAvatarLink = new PopupWithForm(
@@ -47,8 +46,8 @@ const popupWithAvatarLink = new PopupWithForm(
 popupWithAvatarLink.setEventListeners();
 
 // ----------------------------------------------------------------------------------
-const createdCardElement = (data, selector) => {
-  const card = new Card(data, selector, () => popupWithImage.open(data));
+const createCardElement = (data, selector) => {
+  const card = new Card(data, userInfo.getId(), selector, () => popupWithImage.open(data));
   return card.showElement();
 };
 
@@ -56,8 +55,9 @@ const createdCardElement = (data, selector) => {
 const popupWithForm = new PopupWithForm(
   `.popup_type_add-form`, 
   (data) => {
-    const createdCard = createdCardElement(data, `.template`);
-    cardList.prependItem(createdCard);
+    api.postCard(data)
+      .then((resData) => cardList.prependItem(resData))
+      .catch((err) => console.log(err))
   });
 popupWithForm.setEventListeners();
 
@@ -66,7 +66,7 @@ const popupWithImage = new PopupWithImage(`.popup_type_show`);
 popupWithImage.setEventListeners();
 
 // ----------------------------------------------------------------------------------
-const userInfo = new UserInfo({userNameSelector: '.profile__title', userJobSelector: '.profile__subtitle'}, () => api.fetchUserInfo());
+const userInfo = new UserInfo('.profile__title', '.profile__subtitle', () => api.fetchUserInfo());
 userInfo.initUserData();
 
 const profileForm = new PopupWithForm(

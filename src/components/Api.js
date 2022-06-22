@@ -82,6 +82,27 @@ export default class Api {
       })
   }
 
+  postCard({name, link}) {
+    return fetch(this._api + "/cards", {
+      method: 'POST',
+      headers: {
+        "Authorization": this._token,
+        "Content-type": this._contentType,
+      },
+      body: JSON.stringify({
+        name,
+        link,
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject('Возник Error');
+      })
+  }
+
   updateLikes(cardID) {
   }
 
@@ -92,10 +113,3 @@ export default class Api {
 
   }
 }
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-43/users/me', {
-//   method: 'GET',
-//   headers: this._token,
-// })
-//   .then((res) => res.json())
-//   .then((data) => console.log(data))

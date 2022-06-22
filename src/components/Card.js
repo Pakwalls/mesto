@@ -1,12 +1,17 @@
 export default class Card {
 
-  constructor(config, templateSelector, handleCardClick) {
-    this._name = config.name;
+  constructor(cardData, profileId, templateSelector, handleCardClick) {
+    this._name = cardData.name;
     this._alt = this._name;
-    this._link = config.link;
+    this._link = cardData.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
-    this._likeCount = config.likes.length;
+    this._likes = cardData.likes || [];
+    this._likeCount = cardData.likes ? cardData.likes.length : 0;
+    this._isOwner = profileId === cardData.owner._id;
+    this._isLiked = this._likes.some((like) => {
+      return like.id === profileId;
+    });
   };
 
   _getTemplate = () => {
@@ -28,8 +33,11 @@ export default class Card {
   _setEventListeners = () => {
 
     this.cardImage.addEventListener('click', this._handleCardClick);
-    this.likeBtn.addEventListener('click', this._likeCard);   
-    this.delBtn.addEventListener('click', this._deleteCard);
+    this.likeBtn.addEventListener('click', this._likeCard); 
+    if (this._isOwner) {
+      this.delBtn.addEventListener('click', this._deleteCard);
+    }
+    
   };
 
   _createCard = () => {
@@ -37,13 +45,17 @@ export default class Card {
     this.cardName = this._element.querySelector(`.article__title`);
     this.cardImage = this._element.querySelector(`.article__img`);
     this.likeBtn = this._element.querySelector(`.article__feedback`);
-    this.delBtn = this._element.querySelector(`.article__del-btn`);
+    this.delBtn = this._element.querySelector(`.article__del-btn`)
+    if (!this._isOwner) {
+      this.delBtn.style.display = "none";
+    }
     this.likeCount = this._element.querySelector(`.article__like-counter`)
     
     this.cardName.textContent = this._name;
 
     this.cardImage.src = this._link;
     this.cardImage.alt = this._alt;
+
 
     this.likeCount.textContent = this._likeCount;
 
