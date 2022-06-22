@@ -1,17 +1,8 @@
-import {profileImage} from '../utils/data.js'
-
 export default class UserInfo {
-  constructor(userNameSelector, userAboutSelector, loadUserInfo) {
+  constructor(userNameSelector, userAboutSelector) {
     this._userName = document.querySelector(userNameSelector);
     this._userAbout = document.querySelector(userAboutSelector);
-    this._loadUserInfo = loadUserInfo
-  }
-
-  initUserData() {
-    this._loadUserInfo().then((data) => {
-      this.setUserInfo(data);
-      profileImage.setAttribute('src', data.avatar);
-    })
+    this._profileImage = document.querySelector(".profile__img");
   }
 
   getId() {
@@ -25,9 +16,17 @@ export default class UserInfo {
     }
   }
 
-  setUserInfo({ name, about, _id }) {
+  setUserInfo({ name, about, _id}) {
     this._userName.textContent = name;
     this._userAbout.textContent = about;
     this._userId = _id;
+  }
+
+  setAvatar(avatar) {
+    this._profileImage.setAttribute('src', avatar);
+  }
+
+  makeVisible() {
+    this._profileImage.style.visibility = 'visible';  
   }
 }

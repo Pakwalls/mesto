@@ -9,7 +9,7 @@ export const avatarEditbtn = profileCard.querySelector(`.profile__img-changer`)
 export const popupEditWindow = document.querySelector(`.popup_type_edit-form`);
 export const formEdit = popupEditWindow.querySelector(`.popup__form`);
 export const nameInput = formEdit.querySelector(`#name-field`);
-export const jobInput = formEdit.querySelector(`#job-field`);
+export const aboutInput = formEdit.querySelector(`#about-field`);
 
 // конфиг для валидации
 

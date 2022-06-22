@@ -20,7 +20,7 @@ export default class Api {
           return res.json();
         }
 
-        return Promise.reject('Возник Error');
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
       })
   }
 
@@ -40,8 +40,8 @@ export default class Api {
         if (res.ok) {
           return res.json();
         }
-
-        return Promise.reject('Возник Error');
+        
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
       })
   }
 
@@ -61,7 +61,7 @@ export default class Api {
           return res.json();
         }
 
-        return Promise.reject('Возник Error');
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
       })
   }
 
@@ -78,7 +78,7 @@ export default class Api {
           return res.json();
         }
 
-        return Promise.reject('Возник Error');
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
       })
   }
 
@@ -99,17 +99,58 @@ export default class Api {
           return res.json();
         }
 
-        return Promise.reject('Возник Error');
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
       })
   }
 
-  updateLikes(cardID) {
+  deleteCard(cardId) {
+    return fetch(this._api + `/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        "Authorization": this._token,
+        "Content-type": this._contentType,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
+      })
+  }
+  
+  putLike(cardId) {
+    return fetch(this._api + `/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        "Authorization": this._token,
+        "Content-type": this._contentType,
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
+      })
   }
 
+  deleteLike(cardId) {
+    return fetch(this._api + `/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        "Authorization": this._token,
+        "Content-type": this._contentType,
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
 
-
-  deleteCard(avatar) {
-
-
+        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
+      })
   }
 }
