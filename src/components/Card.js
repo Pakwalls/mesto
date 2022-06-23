@@ -27,7 +27,7 @@ export default class Card {
     this._element = null;
   };
   
-  _likeCard = () => {
+  likeCard = () => {
     this._likeBtn.classList.toggle(`article__feedback_active`);
     this._isLiked = !this._isLiked;
   };

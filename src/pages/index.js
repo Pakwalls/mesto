@@ -77,14 +77,14 @@ const createCardElement = (data, selector) => {
       if (!card.getIsLiked()) {
         api.putLike(data._id)
           .then((res) => {
-            card._likeCard();
+            card.likeCard();
             card.updateLikes(res.likes.length);
           })
           .catch((err) => console.error(err))
       } else {
         api.deleteLike(data._id)
           .then((res) => {
-            card._likeCard();
+            card.likeCard();
             card.updateLikes(res.likes.length);
           })
           .catch((err) => console.error(err));
