@@ -66,7 +66,7 @@ const createCardElement = (data, selector) => {
       popupWithConfirm.setSubmitAction(() => {
         return api.deleteCard(data._id)
           .then(() => {
-            card._deleteCard();
+            card.deleteCard();
             popupWithConfirm.close();
           })
           .catch((err) => console.error(err))
@@ -120,39 +120,48 @@ const profileForm = new PopupWithForm(
   });
 profileForm.setEventListeners();
 
-// ---------------------------------------------------------------------------------- 
+// ----------------------------------------------------------------------------------
 const fillProfilePopup = () => {
   const { nameContent, aboutContent } = userInfo.getUserInfo();
 
   nameInput.value = nameContent;
   aboutInput.value = aboutContent;
 
-  resetForm(profileForm.getForm());
+  
+  formValidators['popup__edit-form'].resetValidation();
   profileForm.open();
 }
 
-// ---------------------------------------------------------------------------------- 
-const forms = document.querySelectorAll(configData.formSelector)
-forms.forEach((form) => {
-  const validate = new Validator(configData, form)
-  validate.enableValidation()
-})
-
 // ----------------------------------------------------------------------------------
-const resetForm = (form) => {
-  const validate = new Validator(configData, form)
-  validate.hideError();
-  validate.disableSubmitButton();
-}
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (configData) => {
+  const formList = Array.from(document.querySelectorAll(configData.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new Validator(configData, formElement)
+// получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name')
+
+   //записываем под именем формы
+    formValidators[formName] = validator;
+   validator.enableValidation();
+  });
+};
+
+enableValidation(configData);
 
 // ---------------------------------------------------------------------------------- слушатели слушают
 avatarEditbtn.addEventListener('click', () => {
+
+  formValidators['popup__avatar-form'].resetValidation();
   popupWithAvatarLink.open();
 })
 
 profileEditBtn.addEventListener('click', () => fillProfilePopup());
 
 profileAddbtn.addEventListener(`click`, () => {
-  resetForm(popupWithForm.getForm());
+  
+  formValidators['popup__add-form'].resetValidation();
   popupWithForm.open();
 });

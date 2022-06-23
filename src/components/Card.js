@@ -22,7 +22,7 @@ export default class Card {
     .cloneNode(true);
   };
   
-  _deleteCard = () => {
+  deleteCard = () => {
     this._element.remove();
     this._element = null;
   };

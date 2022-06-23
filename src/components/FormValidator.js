@@ -71,6 +71,11 @@ export class Validator {
     }
   };
 
+  resetValidation() {
+    this.hideError();
+    this.disableSubmitButton();
+  }
+
   enableValidation = () => {
     this._setEventListeners();
   };

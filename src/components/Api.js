@@ -7,6 +7,13 @@ export default class Api {
     this._contentType = "application/json";
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
+  }
+
   fetchUserInfo() {
     return fetch(this._api + "/users/me", {
       method: 'GET',
@@ -15,13 +22,7 @@ export default class Api {
         "Content-type": this._contentType,
       }
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
 
   patchUserInfo(name, about) {
@@ -36,13 +37,7 @@ export default class Api {
         about,
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
 
   patchAvatar(avatar) {
@@ -56,13 +51,7 @@ export default class Api {
         avatar
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
 
   fetchCardsList() {
@@ -73,13 +62,7 @@ export default class Api {
         "Content-type": this._contentType,
       }
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
 
   postCard({name, link}) {
@@ -94,13 +77,7 @@ export default class Api {
         link,
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
 
   deleteCard(cardId) {
@@ -111,13 +88,7 @@ export default class Api {
         "Content-type": this._contentType,
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
   
   putLike(cardId) {
@@ -128,13 +99,7 @@ export default class Api {
         "Content-type": this._contentType,
       }
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
 
   deleteLike(cardId) {
@@ -145,12 +110,6 @@ export default class Api {
         "Content-type": this._contentType,
       }
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.json().then((data) => {return Promise.reject(`Получена ошибка, код: ${res.status}, описание: ${data.message}`)});
-      })
+      .then(this._checkResponse)
   }
 }

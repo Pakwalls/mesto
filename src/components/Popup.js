@@ -5,7 +5,7 @@ export default class Popup {
   }
   
   // -------------------------------------------- метод закрытия на escape клавишу
-  _handleEscClose = (e) => {
+  _handleEscClose(e) {
     if (e.key === "Escape") {
       this.close();
     }; 
@@ -17,7 +17,7 @@ export default class Popup {
       this.close();
     };
   }
-
+  
   open() {
     this._popupElement.classList.add(`popup_opened`);
     document.addEventListener('keydown', this._bindedEscCloseHandler);
