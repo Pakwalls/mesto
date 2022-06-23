@@ -153,7 +153,6 @@ enableValidation(configData);
 
 // ---------------------------------------------------------------------------------- слушатели слушают
 avatarEditbtn.addEventListener('click', () => {
-
   formValidators['popup__avatar-form'].resetValidation();
   popupWithAvatarLink.open();
 })
@@ -161,7 +160,6 @@ avatarEditbtn.addEventListener('click', () => {
 profileEditBtn.addEventListener('click', () => fillProfilePopup());
 
 profileAddbtn.addEventListener(`click`, () => {
-  
   formValidators['popup__add-form'].resetValidation();
   popupWithForm.open();
 });
